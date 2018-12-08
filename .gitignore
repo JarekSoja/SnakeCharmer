@@ -2,6 +2,8 @@
 gradle
 build
 !gradle/wrapper/gradle-wrapper.jar
+/src/main/java/resources
+/src/test/java/resources
 
 ### STS ###
 .apt_generated
@@ -28,3 +30,4 @@ build
 /.nb-gradle/
 /gradle/
 /gradlew.bat
+
