@@ -14,10 +14,4 @@ public class SnakeDTO {
 
     //DTOs might be useful in the future, currently they are redundant
 
-    private long snakeId;
-    private String spieces;
-    private boolean sex;
-    private String morphs;
-    private List<PreyDTO> listOfPreys;
-    private List<LocalDate> sheds;
 }
