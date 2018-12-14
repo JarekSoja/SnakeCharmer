@@ -1,8 +1,5 @@
 package com.jsoja.snakecharmer.domain;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.springframework.data.util.Pair;
 
 import javax.persistence.*;
@@ -13,7 +10,6 @@ import java.util.Map;
 
 @Entity
 @Table(name = "SNAKES")
-@NoArgsConstructor
 public class SnakeDO {
 
 
@@ -32,17 +28,33 @@ public class SnakeDO {
     @Column(name = "SEX")
     private boolean sex;
 
-    @Column (name = "MORPHS")
+    @Column(name = "MORPHS")
     private String morphs;
 
     @Column(name = "WEIGHT")
-    private Map<LocalDate, Integer> weights;
+    private int weight;
 
-    @Column(name = "MEALS")
-    private Map<LocalDate, Pair<String, Integer>> listOfMeals;
+    @Column(name = "WEIGHT_DATES")
+    private LocalDate weightDate;
 
-    @Column(name = "SHEDS")
-    private List<LocalDate> sheds;
+    @OneToMany(
+            targetEntity = MealDO.class,
+            mappedBy = "snakeDO",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
+    @Column (name = "MEALS_SNAKE")
+    private List<MealDO> meals;
+
+
+    @OneToMany(
+            targetEntity = ShedDO.class,
+            mappedBy = "snakeDO",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
+    @Column (name = "SHEDS_SNAKE")
+    private List<ShedDO> sheds;
 
     public long getSnakeId() {
         return snakeId;
@@ -84,27 +96,35 @@ public class SnakeDO {
         this.morphs = morphs;
     }
 
-    public List<LocalDate> getSheds() {
+    public List<ShedDO> getSheds() {
         return sheds;
     }
 
-    public void setSheds(List<LocalDate> sheds) {
+    public void setSheds(List<ShedDO> sheds) {
         this.sheds = sheds;
     }
 
-    public Map<LocalDate, Integer> getWeights() {
-        return weights;
+    public int getWeight() {
+        return weight;
     }
 
-    public void setWeights(Map<LocalDate, Integer> weights) {
-        this.weights = weights;
+    public void setWeight(int weight) {
+        this.weight = weight;
     }
 
-    public Map<LocalDate, Pair<String, Integer>> getListOfMeals() {
-        return listOfMeals;
+    public LocalDate getWeightDate() {
+        return weightDate;
     }
 
-    public void setListOfMeals(Map<LocalDate, Pair<String, Integer>> listOfMeals) {
-        this.listOfMeals = listOfMeals;
+    public void setWeightDate(LocalDate weightDate) {
+        this.weightDate = weightDate;
+    }
+
+    public List<MealDO> getMeals() {
+        return meals;
+    }
+
+    public void setMeals(List<MealDO> meals) {
+        this.meals = meals;
     }
 }

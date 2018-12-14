@@ -7,8 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class SnakeDTO {
+public class MealDTO {
 
     //DTOs might be useful in the future, currently they are redundant
-
 }
