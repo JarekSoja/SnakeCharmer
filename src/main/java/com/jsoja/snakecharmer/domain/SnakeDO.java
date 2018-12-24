@@ -1,12 +1,9 @@
 package com.jsoja.snakecharmer.domain;
 
-import org.springframework.data.util.Pair;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Map;
 
 @Entity
 @Table(name = "SNAKES")
@@ -31,12 +28,6 @@ public class SnakeDO {
     @Column(name = "MORPHS")
     private String morphs;
 
-    @Column(name = "WEIGHT")
-    private int weight;
-
-    @Column(name = "WEIGHT_DATES")
-    private LocalDate weightDate;
-
     @OneToMany(
             targetEntity = MealDO.class,
             mappedBy = "snakeDO",
@@ -55,6 +46,35 @@ public class SnakeDO {
     )
     @Column (name = "SHEDS_SNAKE")
     private List<ShedDO> sheds;
+
+    @OneToMany(
+            targetEntity = WeightDO.class,
+            mappedBy = "snakeDO",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
+    @Column (name = "WEIGHTS_SNAKE")
+    private List<WeightDO> weights;
+
+    public SnakeDO(LocalDate birthDate, String spieces, boolean sex, String morphs, List<MealDO> meals, List<ShedDO> sheds, List<WeightDO> weights) {
+        this.birthDate = birthDate;
+        this.spieces = spieces;
+        this.sex = sex;
+        this.morphs = morphs;
+        this.meals = meals;
+        this.sheds = sheds;
+        this.weights = weights;
+    }
+
+    public SnakeDO(LocalDate birthDate, String spieces, boolean sex, String morphs) {
+        this.birthDate = birthDate;
+        this.spieces = spieces;
+        this.sex = sex;
+        this.morphs = morphs;
+    }
+
+    public SnakeDO() {
+    }
 
     public long getSnakeId() {
         return snakeId;
@@ -96,6 +116,14 @@ public class SnakeDO {
         this.morphs = morphs;
     }
 
+    public List<MealDO> getMeals() {
+        return meals;
+    }
+
+    public void setMeals(List<MealDO> meals) {
+        this.meals = meals;
+    }
+
     public List<ShedDO> getSheds() {
         return sheds;
     }
@@ -104,27 +132,11 @@ public class SnakeDO {
         this.sheds = sheds;
     }
 
-    public int getWeight() {
-        return weight;
+    public List<WeightDO> getWeights() {
+        return weights;
     }
 
-    public void setWeight(int weight) {
-        this.weight = weight;
-    }
-
-    public LocalDate getWeightDate() {
-        return weightDate;
-    }
-
-    public void setWeightDate(LocalDate weightDate) {
-        this.weightDate = weightDate;
-    }
-
-    public List<MealDO> getMeals() {
-        return meals;
-    }
-
-    public void setMeals(List<MealDO> meals) {
-        this.meals = meals;
+    public void setWeights(List<WeightDO> weights) {
+        this.weights = weights;
     }
 }

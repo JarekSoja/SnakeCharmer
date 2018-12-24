@@ -25,6 +25,20 @@ public class ShedDO {
     @JoinColumn (name = "SHEDS_SNAKE")
     private SnakeDO snakeDO;
 
+    public ShedDO(LocalDate date, boolean wereTroubles, SnakeDO snakeDO) {
+        this.date = date;
+        this.wereTroubles = wereTroubles;
+        this.snakeDO = snakeDO;
+    }
+
+    public ShedDO(LocalDate date, boolean wereTroubles) {
+        this.date = date;
+        this.wereTroubles = wereTroubles;
+    }
+
+    public ShedDO() {
+    }
+
     public long getShedId() {
         return shedId;
     }

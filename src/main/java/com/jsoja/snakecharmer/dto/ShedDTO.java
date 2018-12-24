@@ -1,13 +1,54 @@
 package com.jsoja.snakecharmer.dto;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import java.time.LocalDate;
 
-@Getter
-@Setter
-@NoArgsConstructor
 public class ShedDTO {
 
-    //DTOs might be useful in the future, currently they are redundant
+
+    private long shedId;
+    private LocalDate date;
+    private boolean wereTroubles;
+    private SnakeDTO snakeDTO;
+
+    public ShedDTO(long shedId, LocalDate date, boolean wereTroubles, SnakeDTO snakeDTO) {
+        this.shedId = shedId;
+        this.date = date;
+        this.wereTroubles = wereTroubles;
+        this.snakeDTO = snakeDTO;
+    }
+
+    public ShedDTO() {
+    }
+
+    public long getShedId() {
+        return shedId;
+    }
+
+    public void setShedId(long shedId) {
+        this.shedId = shedId;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+    public boolean isWereTroubles() {
+        return wereTroubles;
+    }
+
+    public void setWereTroubles(boolean wereTroubles) {
+        this.wereTroubles = wereTroubles;
+    }
+
+    public SnakeDTO getsnakeDTO() {
+        return snakeDTO;
+    }
+
+    public void setsnakeDTO(SnakeDTO snakeDTO) {
+        this.snakeDTO = snakeDTO;
+    }
 }

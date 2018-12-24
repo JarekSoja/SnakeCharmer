@@ -1,5 +1,6 @@
 package com.jsoja.snakecharmer.controller;
 
+import com.jsoja.snakecharmer.repository.MealRepository;
 import com.jsoja.snakecharmer.service.MealService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -12,10 +13,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class MealController {
 
     private final MealService mealService;
-
+    private final MealRepository mealRepository;
 
     @Autowired
-    public MealController(MealService mealService) {
+    public MealController(MealService mealService, MealRepository mealRepository) {
         this.mealService = mealService;
+        this.mealRepository = mealRepository;
     }
+
 }
