@@ -15,7 +15,15 @@ public class WeightService {
         this.weightRepository = weightRepository;
     }
 
-    public WeightDO saveWeightDO(WeightDO weightDO) {
+    public WeightDO saveWeight(WeightDO weightDO) {
         return weightRepository.save(weightDO);
+    }
+
+    public void deleteWeight(long id) {
+        weightRepository.deleteById(id);
+    }
+
+    public WeightDO getWeight(long id) {
+        return weightRepository.getByWeightId(id);
     }
 }

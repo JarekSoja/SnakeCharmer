@@ -29,7 +29,11 @@ public class SnakeService {
         return snakeRepository.save(snake);
     }
 
-    public SnakeDO getSnake(int id) {
+    public void deleteSnake(long id) {
+        snakeRepository.deleteById(id);
+    }
+
+    public SnakeDO getSnake(long id) {
         return snakeRepository.getBySnakeId(id);
     }
 

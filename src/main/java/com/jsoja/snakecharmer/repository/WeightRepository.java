@@ -9,4 +9,6 @@ import javax.transaction.Transactional;
 @Transactional
 @Repository
 public interface WeightRepository extends CrudRepository<WeightDO, Long> {
+
+    public WeightDO getByWeightId(long id);
 }

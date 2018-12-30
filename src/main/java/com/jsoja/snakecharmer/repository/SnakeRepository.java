@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 public interface SnakeRepository extends CrudRepository<SnakeDO, Long> {
 
-    SnakeDO getBySnakeId(int id);
+    SnakeDO getBySnakeId(long id);
 
 
 }

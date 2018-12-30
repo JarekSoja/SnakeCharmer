@@ -8,4 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 @Repository
 public interface MealRepository extends CrudRepository<MealDO, Long> {
+
+    public MealDO getByMealId(long id);
 }

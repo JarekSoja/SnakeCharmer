@@ -9,5 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 public interface ShedRepository extends CrudRepository<ShedDO, Long> {
 
+    public ShedDO getByShedId(long id);
+
 
 }
