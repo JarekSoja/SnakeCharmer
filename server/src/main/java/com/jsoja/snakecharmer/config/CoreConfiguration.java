@@ -1,4 +1,4 @@
-package com.library.api.config;
+package com.jsoja.snakecharmer.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
