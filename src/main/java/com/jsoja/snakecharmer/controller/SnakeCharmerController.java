@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
+
 @CrossOrigin(origins = "*")
 @RequestMapping("/")
 @RestController
@@ -49,26 +51,26 @@ public class SnakeCharmerController {
         this.weightMapper = weightMapper;
     }
 
-    @PostMapping
+    @PostMapping(consumes = APPLICATION_JSON_VALUE)
     public SnakeDO createSnake(@RequestBody SnakeDTO snakeDTO) {
         SnakeDO snake = snakeMapper.mapToSnakeDO(snakeDTO);
         return snakeService.saveSnake(snake);
     }
 
-    @PostMapping(value ="/shed")
+    @PostMapping(value ="/shed", consumes = APPLICATION_JSON_VALUE)
     public ShedDO createShed(@RequestBody ShedDTO shedDTO) {
         ShedDO shed = shedMapper.mapToShedDO(shedDTO);
         return shedService.saveShed(shed);
     }
 
-    @PostMapping(value ="/meal")
+    @PostMapping(value ="/meal", consumes = APPLICATION_JSON_VALUE)
     public MealDO createMeal(@RequestBody MealDTO mealDTO) {
         MealDO meal = mealMapper.mapToMealDO(mealDTO);
         return mealService.saveMeal(meal);
     }
 
-    @PostMapping(value = "/weight")
-    public WeightDO createWeight(WeightDTO weightDTO) {
+    @PostMapping(value = "/weight", consumes = APPLICATION_JSON_VALUE)
+    public WeightDO createWeight(@RequestBody WeightDTO weightDTO) {
         WeightDO weight = weightMapper.mapToWeightDO(weightDTO);
         return weightService.saveWeight(weight);
     }
@@ -117,21 +119,60 @@ public class SnakeCharmerController {
         return weightMapper.mapToWeightDTO(weightDO);
     }
 
-    @PostMapping(value ="/weight")
-    public WeightDO createWeight(@RequestBody WeightDTO weightDTO, @RequestParam("id") Integer snakeID) {
-        WeightDO weight = weightMapper.mapToWeightDO(weightDTO);
-        WeightDO weightSaved = weightService.saveWeight(weight);
-        return weightSaved;
-    }
-
     @GetMapping(value ="/weight/{id}")
-    public WeightDTO getCurrentWeight(@RequestParam("id") Integer snakeID) {
+    public WeightDTO getCurrentWeight(@RequestParam("id") long snakeID) {
         SnakeDO snake = snakeService.getSnake(snakeID);
         List<WeightDO> weights = snake.getWeights();
         return weightMapper.mapToWeightDTO(weights.get(weights.size()-1));
     }
 
+    @GetMapping(value="/shed")
+    public List<ShedDTO> getAllSheds(@RequestParam("id") long snakeId) {
+        SnakeDO snake = snakeService.getSnake(snakeId);
+        List<ShedDO> sheds = snake.getSheds();
+        return shedMapper.mapToShedDTOList(sheds);
+    }
 
+    @GetMapping(value="/meal")
+    public List<MealDTO> getAllMeals(@RequestParam("id") long snakeId) {
+        SnakeDO snake = snakeService.getSnake(snakeId);
+        List<MealDO> meals = snake.getMeals();
+        return mealMapper.mapToMealDTOList(meals);
+    }
 
+    @GetMapping(value ="/meal/{id}")
+    public MealDTO getLastMeal(@RequestParam("id") long snakeID) {
+        SnakeDO snake = snakeService.getSnake(snakeID);
+        List<MealDO> meals = snake.getMeals();
+        return mealMapper.mapToMealDTO(meals.get(meals.size()-1));
+    }
+
+    @PutMapping
+    public SnakeDTO updateSnake(@RequestBody SnakeDTO snakeDTO) {
+        SnakeDO snakeDO = snakeMapper.mapToSnakeDO(snakeDTO);
+        snakeService.saveSnake(snakeDO);
+        return snakeMapper.mapToSnakeDTO(snakeDO);
+    }
+
+    @PutMapping(value ="/shed/{id}")
+    public ShedDTO updateShed(@RequestBody ShedDTO shedDTO) {
+        ShedDO shedDO = shedMapper.mapToShedDO(shedDTO);
+        shedService.saveShed(shedDO);
+        return shedMapper.mapToShedDTO(shedDO);
+    }
+
+    @PutMapping(value ="/meal/{id}")
+    public MealDTO updateMeal(@RequestBody MealDTO mealDTO) {
+        MealDO mealDO = mealMapper.mapToMealDO(mealDTO);
+        mealService.saveMeal(mealDO);
+        return mealMapper.mapToMealDTO(mealDO);
+    }
+
+    @PutMapping(value ="/weight/{id}")
+    public WeightDTO updateWeight(@RequestBody WeightDTO weightDTO) {
+        WeightDO weightDO = weightMapper.mapToWeightDO(weightDTO);
+        weightService.saveWeight(weightDO);
+        return weightMapper.mapToWeightDTO(weightDO);
+    }
 
 }
